@@ -1,25 +1,26 @@
-import { useState } from 'react'
-import AuthContext from './contexts/AuthContext'
-import LoginButton from './components/LoginButton'
-import LogoutButton from './components/LogoutButton'
+import { useState } from "react";
+import AuthContext from "./contexts/AuthContext";
+import LoginForm from "./components/login/LoginForm";
+import Navigation from "./components/navigation/Navigation";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   return (
-    <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
-      <div className='bg-blue-300 p-3'>
-      {
-        isAuthenticated ?  <LogoutButton/> : <LoginButton/>
-      }
-      </div>
-      <div className='container mx-auto px-3'>
-        {
-          isAuthenticated ? <div>You're logged in</div> : <div>You're logged out</div>
-        }
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+      <Navigation />
+
+      <div className="flex items-center justify-center">
+        <div className="mx-auto px-3">
+          {isAuthenticated ? (
+            <div className="mt-5">You're logged in</div>
+          ) : (
+            <LoginForm />
+          )}
+        </div>
       </div>
     </AuthContext.Provider>
-  )
+  );
 }
 
-export default App
+export default App;
